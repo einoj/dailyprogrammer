@@ -40,9 +40,46 @@ int addEvent(char *description, char *date, event **root)
     return 0;
 }
 
-int removeEvent(char *date) {
+int numEvents(event *root)
+{
+    int s = 0;
 
+    while(root != 0) {
+        s++;
+        root = root->next;
+    }
+
+    return s;
 }
+
+char** listEventsOnDate(char *date, event *root)
+{
+    char** eventsOnDate = malloc(numEvents(root) * sizeof(char*));
+    int i = 0;
+    while (root != 0) {
+        if (!(strncmp(date, root->date, 16))) {
+            eventsOnDate[i] = root->description;
+        }
+        root = root->next;
+    }
+    return eventsOnDate;
+}
+
+char* chooseEventOnDate(char** eventDescriptions)
+{
+    int i;
+    printf("Choose event:\n");
+    for (i = 0; i < sizeof(eventDescriptions); i++) {
+        printf("%d: %s\n", i, eventDescriptions[i]);
+    }
+}
+
+
+int removeEvent(char *date, event **root) {
+    event *tmp;
+    tmp = *root;
+}
+
 
 void printEvents(event *root)
 {
@@ -58,7 +95,6 @@ void printEvents(event *root)
 
 int main(void)
 {
-
     event *root;
     char *d1, *d2, *t1, *t2;
     d1 = malloc(141*sizeof(char));
