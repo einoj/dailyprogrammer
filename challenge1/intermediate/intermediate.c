@@ -148,7 +148,7 @@ int removeEvent(event **root, char* date, char* description)
 
 
     /*check if the first element is to be deleted*/
-    if( !(strncmp(date,curr->date,10) && !(strncmp(description, curr->description, 141))))
+    if( (strncmp(date,curr->date,10) == 0) && (strncmp(description, curr->description, 141) == 0))
     {
         printf("date=%s des=%s\n, root.date-=%s, root.des=%s",date, description,curr->date,curr->description);
         (*root) = (*root)->next;
@@ -158,7 +158,7 @@ int removeEvent(event **root, char* date, char* description)
         while (curr->next != 0) {
             prev = curr;
             curr = curr->next;
-            if( !(strncmp(date,curr->date,10) && !(strncmp(description, curr->description, 141))))
+            if( (strncmp(date,curr->date,10) == 0) && (strncmp(description, curr->description, 141) == 0))
                 prev->next = curr->next;
                 free(curr);
         }
